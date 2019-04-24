@@ -93,7 +93,7 @@ https://github.com/GerbenCdg/Keycloak4Fun
 - Sécurité
 - Utilisation de SSO (Single Sign-On : Authentification unique)
 
-Note : 
+Note: 
 - Eviter la duplication des données entre différents comptes, facilite la maintenance
 - Protocoles standard pour avoir une solution connue, permet théoriquement plus facilement de changer d'un provider d'IAM à un autre
 ; permet de passer au point suivant :
@@ -282,11 +282,11 @@ services.AddAuthentication(options =>
     options.Audience = "webapi"; // L'ID de notre client OpenID Connect
 });
 ```
-
++++
 ## Sécurisation d'une Web API
 ### OpenID Connect Discovery Service
 
-- Comment notre WebAPI connaît les liens de Keycloak grâce à la configuration que nous venons de lui renseigner ?
+- Comment notre WebAPI connaît les liens d'échanges de tokens à partir de à la configuration que nous venons de lui renseigner ?
 - Grâce au [well-known/openid-configuration !](http://localhost:8080/auth/realms/coding4fun/.well-known/openid-configuration)
 
 +++
@@ -312,24 +312,22 @@ services.AddAuthentication(options =>
 ## Sécurisation d'une Web API
 ### Configuration de Startup.cs
 
-- Relancez le projet. Vous devriez constater une 401.
-
+- Relancez le projet. Vous devriez constater une error 401 Unauthorized.
 
 +++
 ## Sécurisation d'une Web API
 ### Test de requête dans Postman
 
-- Tentons d'effectuer une première requête GET sur notre API
+- Tentons d'effectuer une première requête GET sur notre API grâce à Postman.
 - Tab "Authorization" -> "Access Token" -> "Get new Access Token"
-- Quel flow choisir ? voir diapo suivante.
+- Mais quel flow choisir ? 
 
 +++
 ## Sécurisation d'une Web API
 ### Les différents flows d'autorisation
 
-- Il existe une multitude de flows d'authentification. Son choix dépendra de plusieurs critères.
+- Il existe une multitude de flows d'authentification. Son choix se fera en fonction de plusieurs critères.
 https://cdn2.auth0.com/docs/media/articles/api-auth/oauth2-grants-flow.png
-TODO embed image
 
 +++
 ## Sécurisation d'une Web API
@@ -354,8 +352,9 @@ TODO embed image
 ## Sécurisation d'une Web API
 ### Contenu d'un Access Token
 
-- Format JWT
+- Format JWT (Json Web Token) : RFC 7519. Permet de représenter des claims de manière sécurisée entre 2 tiers.
 - Explorez le contenu de votre token sur [jwt.io](https://jwt.io/) !
+- Quelles sont les 3 parties d'un JWT ? 
 
 ---
 
@@ -376,6 +375,7 @@ TODO embed image
 ### ValuesController.cs
 
 - Ajout de la policy "Administrator"
+
 ```
     [Authorize(Policy =  "Administrator")]
     [Route("api/[controller]")]
@@ -388,7 +388,7 @@ TODO embed image
 ### Startup.cs
 
 - Nous devons faire le lien entre notre role Keycloak et la Policy
-- Dans la méthode ConfigureServices() 
+-> méthode ConfigureServices() 
 ```
 services.AddAuthorization(options =>
 {
@@ -403,10 +403,10 @@ services.AddAuthorization(options =>
 - Nous utiliserons le "Password Credentials Grant" dans Postman
 - Activer "Direct Access Grant" dans la config du client Keycloak
 
++++
 ## Gestion de rôles
 #### Ca fonctionne ? Trop fort ;)
-- Regardons à nouveau le contenu de notre Access Token
-[jwt.io](https://jwt.io) :)
+- Regardons à nouveau le contenu de notre Access Token :) -> [jwt.io](https://jwt.io)
 
 ---
 # Fin
@@ -415,7 +415,7 @@ services.AddAuthorization(options =>
 # Fin
 ### Félicitations !
 
-####Vous êtes maintenant un expert certifié Keycloak et OpenID Connect
+#### Vous êtes maintenant un expert certifié Keycloak
 
 
 
