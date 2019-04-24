@@ -30,24 +30,12 @@ namespace C4FWebApi
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddAuthentication(x =>
+            services.AddAuthentication(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-           // .AddJwtBearer(options =>
-           //{
-           //    options.RequireHttpsMetadata = false;
-           //    options.Authority = "webapi";
-           //    options.Audience = "http://localhost:8080/auth/realms/coding4fun";
-           //})
-
-           //services.AddAuthentication(options =>
-           //{
-           //    options.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
-           //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-           //})
-           .AddJwtBearer(options =>
+            .AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
                 options.Authority = "http://localhost:8080/auth/realms/coding4fun";
@@ -63,19 +51,9 @@ namespace C4FWebApi
                     ValidateLifetime = true
                 };
             });
-            //.AddCookie()
-            //.AddOpenIdConnect(options =>
-            //{
-            //    options.RequireHttpsMetadata = false;
-            //    options.MetadataAddress = "http://localhost:8080/auth/realms/coding4fun/.well-known/openid-configuration";
-            //    options.Authority = "http://localhost:8080/auth/realms/coding4fun";
-            //    options.ClientId = "webapi";
-            //    options.ClientSecret = "66776d4c-63c7-4f70-8251-c0a2fb67c7d3";
-            //});
 
             services.AddAuthorization(options =>
             {
-                //options.AddPolicy("Administrator", policy => policy.RequireClaim("webapi_admin", "[Administrator]"));
                 options.AddPolicy("Administrator", policy => policy.RequireRole("administrator"));
             });
 
@@ -88,11 +66,6 @@ namespace C4FWebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            // app.UseCors(x => x
-            //    .AllowAnyOrigin()
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseMvc();
