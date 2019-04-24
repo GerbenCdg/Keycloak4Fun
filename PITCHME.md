@@ -38,12 +38,13 @@ PC perso ou Michelin avec droits admin
 
 [Téléchargement Visual Studio Code](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16) 
 
++++
 ## Téléchargement et installation de Docker for Windows et Oracle VirtualBox
 
 https://docs.docker.com/docker-for-windows/install/
 
 <br> Configuration Oracle Virtual Box pour mapping de ports
-https://gitpitch.com/Pierre48/Coding4Fun.Net
+<br> https://gitpitch.com/Pierre48/Coding4Fun.Net
 
 
 +++
@@ -129,6 +130,9 @@ Note :
 ## Pratique
 ### Démarrage de Keycloak
 
+- Pensez à mapper les ports que vous voulez exposer dans Virtual Box
+<br>
+
 ```
 docker image ls
 docker run -p 8080:8080 <imageID>
@@ -138,6 +142,7 @@ docker run -p 8080:8080 <imageID>
 
 +++
 ## Pratique
+### Accès à la console admin
 
 - Ajoutez un utilisateur admin pour débloquer l'accès à la console administrateur
 - Prenez la main de la console bash du container docker démarré pour exécuter le script qui permet d'ajouter un nouvel utilisateur
@@ -178,11 +183,6 @@ docker restart loving_taussig
 
 [localhost:8080/auth/realms/coding4fun/account]()
                     
-+++
-## Pratique
-### Ajout d'un client
-
-- En direct depuis mon pc
 
 ---
 
@@ -198,6 +198,10 @@ TODO expliquer, inclure schémas
 
 ---
 
+# Pratique
+## Partie 1 : Sécurisation d'une Web API
+
++++
 ## Sécurisation d'une Web API
 
 Clone de mon repo git qui contient une API déjà prête à être utilisée ;)
@@ -206,32 +210,72 @@ Clone de mon repo git qui contient une API déjà prête à être utilisée ;)
 +++
 ## Sécurisation d'une Web API
 ### Découverte du projet
--Familiarisation avec le projet C4FWebApi 
--Nous allons mettre en place la gestion de l'authentification
+- Rappel : [.NET CORE 2.2 Requis](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+- Familiarisation avec le projet C4FWebApi 
+- Nous allons mettre en place la gestion de l'authentification
 
 +++
 ## Sécurisation d'une Web API
-### Paramétrage du client
+### Découverte du projet
 
-
-TODO à définir. Donner paramètres à appliquer
-
+- Startup.cs : Configuration des services d'authentification, 
+- Controllers/ : Définition des différents endpoints de notre API
 
 +++
 ## Sécurisation d'une Web API
-## Que contient un token JWT ?
+### Configuration de Startup.cs
+
+TODO 
+
++++
+## Sécurisation d'une Web API
+### Configuration de Startup.cs
+
+TODO 
+
++++
+## Sécurisation d'une Web API
+### Test de requête dans Postman
+
+Pensez à désactiver la SSL dans les paramètres de Postman
+TODO 
+
++++
+## Sécurisation d'une Web API
+### Configuration du Client Keycloak
+
+TODO 
+
++++
+## Sécurisation d'une Web API
+### Test requête Postman
+
+<br>
+TODO 
+
+---
+
+# Pratique
+## Partie 2 : Gestion de rôles
+
++++
+## Partie 2 : Gestion de rôles
+### Startup.cs
+
+
+
++++
+## Partie 2 : Gestion de rôles
+### Que contient un token JWT ?
  
+<b> Token JWT </b> 
+<br> https://jwt.io
 
-
-Token JWT : 
-jwt.io
-
-
++++
 
 A rajouter :
-Postman : penser à désactiver la SSL dans les params
 Désactiver HTTPs à la création du projet
-Dotnet core 2.1
+Dotnet core 2.2
 Création du projet
 
 http://localhost:8080/auth/realms/coding4fun/.well-known/openid-configuration
