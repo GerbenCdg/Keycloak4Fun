@@ -4,7 +4,7 @@
 # Présentation générale
 
 ---
-# Au programme
+## Au programme
 
 - Introduction générale
 - IAM et principales fonctionnalités 
@@ -12,30 +12,41 @@
 
 +++
 
-# Discover & Practice !
+## Discover & Practice !
 
 - Docker + Keycloak
 - Exploration de la console administrateur de Keycloak
 - Composition token JWT
 - Sécurisation avec Keycloak d'une API fournie en ajoutant une authentification
-- Web app qui permet à l'utilisateur de se connecter et d'accéder à la ressource protégée
+- Dev d'une web app qui permet à l'utilisateur de se connecter et d'accéder à la ressource protégée
 
 ---
 
-# Avant de commencer (prérequis) ...
+## Avant de commencer (prérequis) ...
 
-- Téléchargement et installation de Docker for Windows et Oracle VirtualBox
+PC perso ou Michelin avec droits admin 
+<br> Programmes (liens de téléchargement sur les slides en-dessous)
+- Visual Studio ou VS Code
+- Docker for Windows et Oracle VirtualBox
 - Téléchargement de l'image docker Keycloak
+- .NET CORE 2.2
 - Clone de mon repo git : https://github.com/GerbenCdg/Keycloak4Fun
+- PostMan pour tester des requêtes vers la Web API
 
 +++
+## Téléchargement et installation Visual Studio
+
+[Téléchargement Visual Studio Code](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16) 
 
 ## Téléchargement et installation de Docker for Windows et Oracle VirtualBox
 
 https://docs.docker.com/docker-for-windows/install/
 
-+++
+<br> Configuration Oracle Virtual Box pour mapping de ports
+https://gitpitch.com/Pierre48/Coding4Fun.Net
 
+
++++
 ## Téléchargement de l'image docker Keycloak
 
 ````
@@ -44,6 +55,13 @@ docker pull jboss/keycloak
 
 +++
 
+## Téléchargement .NET CORE 2.2
+
+https://dotnet.microsoft.com/download/dotnet-core/2.2
+
+https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial
+
++++
 ## Clone de mon repo git
 -Le repository suivant contient un projet ASP.NET avec une API qui sera utilisée pour la dernière partie 
 qui portera sur la sécurisation d'une API avec Keycloak.
@@ -52,8 +70,8 @@ https://github.com/GerbenCdg/Keycloak4Fun
 
 ---
 
-# IAM (Identity and Access Management)
-## What is IAM ? 
+## IAM (Identity and Access Management)
+### What is IAM ? 
 
 - Gestion d'identité
     - Comptes utilisateurs
@@ -65,8 +83,8 @@ https://github.com/GerbenCdg/Keycloak4Fun
 
 +++
 
-# IAM (Identity and Access Management)
-## Besoins d'IAM
+## IAM (Identity and Access Management)
+### Besoins d'IAM
 
 - Centraliser les comptes utilisateurs 
 - Basé sur des protocoles standards (SAML, OpenID Connect + OAuth 2.0)
@@ -82,8 +100,8 @@ Note :
 
 ---
 
-# Keycloak
-## Introduction 
+## Keycloak
+### Introduction 
 
 - Développé depuis 2014 en open-source par JBoss, une filiale de Redhat
 - Solution d'IAM très complète
@@ -91,33 +109,35 @@ Note :
 
 +++
 
-# Keycloak 
-## Avantages
+## Keycloak 
+### Avantages
 - Options "click to enable"
 - Très paramètrable
 - Pas besoin d'écrire du code
 - Console administrateur très complète
+- Agrégation de comptes avec LDAP
+- Ajout de providers (Google, Facebook, Twitter...)  
 - Admin API
 
 ---
 
-# Passons à la pratique !
+## Passons à la pratique !
 - La doc ! 
 <br> https://www.keycloak.org/docs/latest/getting_started/index.html
 
 +++
-# Pratique
-## Démarrage de Keycloak
+## Pratique
+### Démarrage de Keycloak
 
 ```
 docker image ls
 docker run -p 8080:8080 <imageID>
 ```
 
-- Le démarrage peut durer quelques minutes sur un docker émulé sous Windows (4 minutes sur mon PC)
+- Le démarrage peut durer quelques minutes sur un docker émulé sous Windows (jusqu'à 4 minutes sur mon PC)
 
 +++
-# Pratique
+## Pratique
 
 - Ajoutez un utilisateur admin pour débloquer l'accès à la console administrateur
 - Prenez la main de la console bash du container docker démarré pour exécuter le script qui permet d'ajouter un nouvel utilisateur
@@ -132,71 +152,89 @@ docker restart loving_taussig
 ```
 
 +++
-# Pratique
-## Explorons la console administrateur
+## Pratique
+### Explorons la console administrateur
 
 - Connectez-vous sur localhost:8080/auth/admin avec vos identifiants
 - Je vous laisse regarder par vous-mêmes pendant 2 min ;)
 
 +++
-# Pratique
-## Ajout d'un realm
+## Pratique
+### Ajout d'un realm
 
 - En direct depuis mon pc
 - C'est quoi un realm ?
 - Config d'un realm
 
 +++
-# Pratique
-## Ajout d'un utilisateur
+## Pratique
+### Ajout d'un utilisateur
 
 - En direct depuis mon pc
 
 +++
-# Pratique
-## Connexion en tant que cet utilisateur
+## Pratique
+### Connexion en tant que cet utilisateur
 
 [localhost:8080/auth/realms/coding4fun/account]()
                     
 +++
-# Pratique
-## Ajout d'un client
+## Pratique
+### Ajout d'un client
 
 - En direct depuis mon pc
 
 ---
 
-#Les protocoles
-##OpenID Connect et OAuth 2.0
+## Les protocoles
+### OpenID Connect et OAuth 2.0
 - Fonctionnement
 - TODO ajouter schémas
 
 +++
-#Les protocoles
-## Les différents Authentication Flows
+## Les protocoles
+### Les différents Authentication Flows
 TODO expliquer, inclure schémas
 
 ---
 
-#Sécurisation d'une Web API
+## Sécurisation d'une Web API
 
 Clone de mon repo git qui contient une API déjà prête à être utilisée ;)
 <br> https://github.com/GerbenCdg/Keycloak4Fun
 
 +++
-#Sécurisation d'une Web API
-## Paramétrage du client
+## Sécurisation d'une Web API
+### Découverte du projet
+-Familiarisation avec le projet C4FWebApi 
+-Nous allons mettre en place la gestion de l'authentification
+
++++
+## Sécurisation d'une Web API
+### Paramétrage du client
+
 
 TODO à définir. Donner paramètres à appliquer
 
+
 +++
-#Sécurisation d'une Web API
+## Sécurisation d'une Web API
 ## Que contient un token JWT ?
  
+
+
 Token JWT : 
 jwt.io
 
 
+
+A rajouter :
+Postman : penser à désactiver la SSL dans les params
+Désactiver HTTPs à la création du projet
+Dotnet core 2.1
+Création du projet
+
+http://localhost:8080/auth/realms/coding4fun/.well-known/openid-configuration
 
 
 
