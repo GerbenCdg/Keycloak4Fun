@@ -1,6 +1,6 @@
 # Keycloak4Fun
 
-#### Session de Coding4Fun sur Keycloak ! le jeudi 25 Avril.
+#### Session de Coding4Fun sur Keycloak ! Jeudi 25 Avril 2019.
 
 ## [Lien GitPitch](https://gitpitch.com/gerbencdg/keycloak4fun)
 
@@ -11,8 +11,6 @@
 - Les protocoles utilisés par Keycloak (OAuth 2.0, Open ID Connect)
 - Le token JWT
 - Les flows d'authorisation OAuth 2.0
-
-+++
 
 ## Discover & Practice !
 
