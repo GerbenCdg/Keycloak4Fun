@@ -209,7 +209,7 @@ Grant types : username + password, bearer tokens
 
 - Utilisé par Microsoft, Google, Amazon, ...
 - OAuth 2.0 seul ne gère pas de l'identité, mais uniquement l'authorisation
-- OpenID Connect apporte une couche d'identity par desus du protocole OAuth 2.0
+- OpenID Connect apporte une couche d'identité par-dessus du protocole OAuth 2.0
 
 +++?image=assets/images/openid_scheme.PNG&position=center&size=60%
 
