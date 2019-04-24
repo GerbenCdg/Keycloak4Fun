@@ -1,7 +1,5 @@
 # Keycloak
-
----
-# Présentation générale
+### Coding4Fun - Session avril 2019 
 
 ---
 ## Au programme
@@ -9,6 +7,7 @@
 - Introduction à l'IAM et principales fonctionnalités
 - Découverte de Keycloak
 - Les protocoles utilisés par Keycloak (OAuth 2.0, Open ID Connect)
+- Le token JWT
 - Les flows d'authorisation OAuth 2.0
 
 +++
@@ -18,7 +17,7 @@
 - Docker + Keycloak
 - Exploration de la console administrateur de Keycloak
 - Sécurisation d'une Web API en .NET CORE 
-- Composition token JWT
+- Requêtes API avec Postman
 - Gestion de rôles utilisateur 
 
 ---
@@ -65,7 +64,7 @@ https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial
 
 +++
 ## Clone de mon repo git
-- Le repository suivant contient un projet ASP.NET avec une API qui sera utilisée pour la dernière partie 
+- Le repository suivant contient un projet .NET CORE 2.2 WebApi qui sera utilisée pour la dernière partie 
 qui portera sur la sécurisation d'une API avec Keycloak.
 
 https://github.com/GerbenCdg/Keycloak4Fun
@@ -81,7 +80,6 @@ https://github.com/GerbenCdg/Keycloak4Fun
 
 - Gestion des accès
     - Contrôler l'accès à des resources
-
 
 +++
 
@@ -110,13 +108,19 @@ Note:
 - Facilite la vie aux développeurs
 
 +++
-
 ## Keycloak 
-### Avantages
+### Avantages (1)
 
 - Pas besoin d'écrire du code
 - Aggrégation de comptes avec LDAP
 - Ajout de providers (Google, Facebook, Twitter...)  
+- Notions de realms
+- Gestion de rôles utilisateurs
+
++++
+## Keycloak 
+### Avantages (2)
+
 - Très customizable pour s'adapter à nos besoins
 - Options "click to enable"
 - Console administrateur
@@ -129,9 +133,8 @@ Note:
 <br> https://www.keycloak.org/docs/latest/getting_started/index.html
 
 +++
-## Pratique
+## Pratique - Échauffement
 ### Démarrage de Keycloak
-
 - Pensez à mapper les ports que vous voulez exposer dans Virtual Box
 <br>
 
@@ -143,7 +146,7 @@ docker run -p 8080:8080 <imageID>
 - Le démarrage peut durer quelques minutes sur un docker émulé sous Windows (jusqu'à 4 minutes sur mon PC)
 
 +++
-## Pratique
+## Pratique - Échauffement
 ### Accès à la console admin
 
 - Ajoutez un utilisateur admin pour débloquer l'accès à la console administrateur
@@ -159,14 +162,14 @@ docker restart loving_taussig
 ```
 
 +++
-## Pratique
+## Pratique - Échauffement
 ### Explorons la console administrateur
 
 - Connectez-vous sur localhost:8080/auth/admin avec vos identifiants
 - Je vous laisse regarder par vous-mêmes pendant 2 min ;)
 
 +++
-## Pratique
+## Pratique - Échauffement
 ### Ajout d'un realm
 
 - En direct depuis mon pc
@@ -174,23 +177,43 @@ docker restart loving_taussig
 - Config d'un realm
 
 +++
-## Pratique
+## Pratique - Échauffement
 ### Ajout d'un utilisateur
 
 - En direct depuis mon pc
 
 +++
-## Pratique
+## Pratique - Échauffement
 ### Connexion en tant que cet utilisateur
 
 [localhost:8080/auth/realms/coding4fun/account]()
 
 ---
 
+# Les protocoles
+## OAuth 2.0 & OpenID Connect
+
++++
 ## Les protocoles
-### OpenID Connect et OAuth 2.0
-- Fonctionnement
-- TODO ajouter schémas
+### OAuth 2.0
+
+- Standard pour la délégation d'accès
+- Permet d'accorder l'accès à une ressource (Authorisation) par divers moyens (Grant types)
+
+Note:
+Grant types : username + password, bearer tokens
+
++++
+## Les protocoles
+### OpenID Connect
+
+- Utilisé par Microsoft, Google, Amazon, ...
+- OAuth 2.0 seul ne gère pas de l'identité, mais uniquement l'authorisation
+- OpenID Connect apporte une couche d'identity par desus du protocole OAuth 2.0
+
++++?image=assets/images/openid_scheme.PNG
+
++++?image=assets/images/keycloak_scheme.PNG
 
 ---
 
@@ -352,9 +375,10 @@ https://cdn2.auth0.com/docs/media/articles/api-auth/oauth2-grants-flow.png
 ## Sécurisation d'une Web API
 ### Contenu d'un Access Token
 
-- Format JWT (Json Web Token) : RFC 7519. Permet de représenter des claims de manière sécurisée entre 2 tiers.
+- Format JWT (Json Web Token) défini par la RFC 7519. 
+<br>Permet de représenter des claims de manière sécurisée entre deux tiers.
 - Explorez le contenu de votre token sur [jwt.io](https://jwt.io/) !
-- Quelles sont les 3 parties d'un JWT ? 
+- Quelles sont les 3 parties qui entrent dans la composition d'un JWT ? 
 
 ---
 
