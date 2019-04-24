@@ -64,7 +64,7 @@ https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial
 
 +++
 ## Clone de mon repo git
--Le repository suivant contient un projet ASP.NET avec une API qui sera utilisée pour la dernière partie 
+- Le repository suivant contient un projet ASP.NET avec une API qui sera utilisée pour la dernière partie 
 qui portera sur la sécurisation d'une API avec Keycloak.
 
 https://github.com/GerbenCdg/Keycloak4Fun
