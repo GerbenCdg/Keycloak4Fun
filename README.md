@@ -16,6 +16,6 @@
 - Docker + Keycloak
 - Exploration de la console administrateur de Keycloak
 - Composition token JWT
-- Sécurisation avec Keycloak d'une API fournie en ajoutant une authentification
-- Gestion de rôles utilisateur avec Keycloak
+- Sécurisation d'une Web API en .NET CORE 
+- Gestion de rôles utilisateur 
 

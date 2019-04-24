@@ -6,9 +6,10 @@
 ---
 ## Au programme
 
-- Introduction générale
-- IAM et principales fonctionnalités 
+- Introduction à l'IAM et principales fonctionnalités
+- Découverte de Keycloak
 - Les protocoles utilisés par Keycloak (OAuth 2.0, Open ID Connect)
+- Les flows d'authorisation OAuth 2.0
 
 +++
 
@@ -16,21 +17,21 @@
 
 - Docker + Keycloak
 - Exploration de la console administrateur de Keycloak
+- Sécurisation d'une Web API en .NET CORE 
 - Composition token JWT
-- Sécurisation avec Keycloak d'une API fournie en ajoutant une authentification
-- Gestion de rôles utilisateur avec Keycloak
+- Gestion de rôles utilisateur 
 
 ---
 
 ## Avant de commencer (prérequis) ...
 
-PC perso ou Michelin avec droits admin 
+- PC perso ou Michelin avec droits admin
+
 <br> Programmes (liens de téléchargement sur les slides en-dessous)
 - Visual Studio ou VS Code
 - Docker for Windows et Oracle VirtualBox
 - Téléchargement de l'image docker Keycloak
-- .NET CORE 2.2
-- Clone de mon repo git : https://github.com/GerbenCdg/Keycloak4Fun
+- Librairie .NET CORE 2.2
 - PostMan pour tester des requêtes vers la Web API
 
 +++
@@ -71,8 +72,8 @@ https://github.com/GerbenCdg/Keycloak4Fun
 
 ---
 
-## IAM (Identity and Access Management)
-### What is IAM ? 
+## Intro to IAM 
+### What is IAM (Identity and Access Management) ? 
 
 - Gestion d'identité
     - Comptes utilisateurs
@@ -112,12 +113,13 @@ Note :
 
 ## Keycloak 
 ### Avantages
-- Options "click to enable"
-- Très paramètrable
+
 - Pas besoin d'écrire du code
-- Console administrateur très complète
-- Agrégation de comptes avec LDAP
+- Aggrégation de comptes avec LDAP
 - Ajout de providers (Google, Facebook, Twitter...)  
+- Très customizable pour s'adapter à nos besoins
+- Options "click to enable"
+- Console administrateur
 - Admin API
 
 ---
@@ -190,11 +192,6 @@ docker restart loving_taussig
 - Fonctionnement
 - TODO ajouter schémas
 
-+++
-## Les protocoles
-### Les différents Authentication Flows
-TODO expliquer, inclure schémas
-
 ---
 
 # Pratique
@@ -226,7 +223,7 @@ Clone de mon repo git qui contient une API déjà prête à être utilisée ;)
 ### Configuration de Startup.cs
 
 - On souhaite sécuriser l'accès à notre API. On peut faire cela grâce [au tag Authorize](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/simple?view=aspnetcore-2.2)
-- Le tag peut se mettre devant le controller (voir exemple), soit devant une méthode. 
+- Le tag peut se mettre soit devant le controller (cf. exemple), soit devant une méthode. 
 
 ```
     [Authorize]
@@ -240,7 +237,7 @@ Clone de mon repo git qui contient une API déjà prête à être utilisée ;)
 ## Sécurisation d'une Web API
 ### Configuration de Startup.cs
 
-- Ajouter app.UseAuthentication
+- On souhaite utiliser l'authentification.
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
@@ -270,7 +267,8 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ### Configuration de Startup.cs
 
 - Définition des services d'authentification : Utilisation des schemas JWT. 
-- A ajouter dans la méthode ConfigureServices : 
+- A ajouter dans la méthode ConfigureServices()
+
 ```
 services.AddAuthentication(options =>
 {
